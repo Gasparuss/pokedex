@@ -5,7 +5,13 @@
     "es6": true,
     "es2021": true
   },
-  "extends": ["plugin:react/recommended", "airbnb", "prettier"],
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "plugin:react/recommended",
+    "airbnb",
+    "prettier"
+  ],
   "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
@@ -15,6 +21,7 @@
   },
   "plugins": ["react", "react-hooks", "prettier"],
   "rules": {
+    "no-return-await": 0,
     "react/prop-types": 0,
     "no-unused-vars": "off",
     "arrow-body-style": 0,
