@@ -4,3 +4,5 @@ Tech/framework used 🔧
 - React router dom
 - Axios
 - Material UI
+- Eslint
+- Prettier

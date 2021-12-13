@@ -1,42 +1,92 @@
 import * as React from 'react';
-import {
-  StyledNavigation,
-  StyledLink,
-  StyledNavigationItem
-} from './Navigation.styles';
-import PikachuLogo from '../../assets/img/pikachu.svg';
-import PokeballLogo from '../../assets/img/pokeball.svg';
-import SnorlaxLogo from '../../assets/img/snorlax.svg';
-import ClefairyLogo from '../../assets/img/clefairy.svg';
+import { AppBar } from '@mui/material';
+import { NavLink } from 'react-router-dom';
+import styled from 'styled-components';
+import PokeballLogo from '../../assets/icons/pokeball.svg';
+import ClefairyLogo from '../../assets/icons/clefairy.svg';
+import PikachuLogo from '../../assets/icons/pikachu.svg';
+import SnorlaxLogo from '../../assets/icons/snorlax.svg';
+
+const StyledItem = styled.div`
+  display: flex;
+  align-items: center;
+  min-width: 100px;
+  height: 100%;
+  flex-direction: column;
+  cursor: pointer;
+  &:hover {
+    background: ${({ theme, value }) => {
+      if (value === 'pokedex') return theme.colors.pokedex;
+      if (value === 'favourites') return theme.colors.electric;
+      if (value === 'clefairy') return theme.colors.fairy;
+      if (value === 'logout') return theme.colors.normal;
+      return theme.colors.grey;
+    }};
+    color: white;
+    transition: all 0.4s ease-out;
+  }
+
+  img {
+    height: 50px;
+    width: 50px;
+  }
+`;
+
+const StyledLink = styled(NavLink)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: black;
+
+  &.active {
+    border-bottom: 1px solid
+      ${({ theme, value }) => {
+        if (value === 'pokedex') return theme.colors.pokedex;
+        if (value === 'favourites') return theme.colors.electric;
+        if (value === 'clefairy') return theme.colors.fairy;
+        if (value === 'logout') return true;
+      }};
+  }
+`;
 
 const Navigation = () => {
   return (
-    <StyledNavigation>
+    <AppBar
+      sx={{
+        backgroundColor: 'white',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        boxShadow: '0 3px 15px rgba(0, 0, 0, 0.089)'
+      }}
+    >
       <StyledLink value="pokedex" to="/pokedex">
-        <StyledNavigationItem value="pokedex">
-          <img src={PokeballLogo} alt="pokeball" />
-          <h3>Pokedex</h3>
-        </StyledNavigationItem>
+        <StyledItem value="pokedex">
+          <img src={PokeballLogo} alt="pokeball-logo" />
+          Pokedex
+        </StyledItem>
       </StyledLink>
       <StyledLink value="favourites" to="/favourites">
-        <StyledNavigationItem value="favourites">
-          <img src={PikachuLogo} alt="favourites" />
-          <h3>Favourites</h3>
-        </StyledNavigationItem>
+        <StyledItem value="favourites">
+          <img src={PikachuLogo} alt="pikachu-logo" />
+          Favourites
+        </StyledItem>
       </StyledLink>
       <StyledLink value="clefairy" to="/news">
-        <StyledNavigationItem value="clefairy">
-          <img src={ClefairyLogo} alt="clefairy" />
-          <h3>News</h3>
-        </StyledNavigationItem>
+        <StyledItem value="clefairy">
+          <img src={ClefairyLogo} alt="clefairy-logo" />
+          News
+        </StyledItem>
       </StyledLink>
       <StyledLink value="logout" to="/logout">
-        <StyledNavigationItem value="logout">
-          <img src={SnorlaxLogo} alt="logout" />
-          <h3>Logout</h3>
-        </StyledNavigationItem>
+        <StyledItem value="logout">
+          <img src={SnorlaxLogo} alt="snorlax-logo" />
+          Logout
+        </StyledItem>
       </StyledLink>
-    </StyledNavigation>
+    </AppBar>
   );
 };
 

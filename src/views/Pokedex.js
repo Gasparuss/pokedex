@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  AppBar,
   Toolbar,
   Grid,
   CardContent,
   CardMedia,
-  CircularProgress,
   Typography,
-  SvgIcon
+  AppBar
 } from '@mui/material';
-import { PokeCard } from '../components/Card/index';
-import { getImageSourcefromID, toFirstCharUppercase } from '../utils/functions';
+
+import FullPageSpinner from '../components/FullPageSpinner/FullPageSpinner';
+import Navigation from '../components/Navigation/Navigation';
+import { PokeCard } from '../components/PokeCard/PokeCard';
+import {
+  getImageSourcefromID,
+  toFirstCharUppercase,
+  getTypeIcon,
+  findColor
+} from '../utils/GlobalFunctions';
 import { usePokemons } from '../hooks/usePokemons';
 
 const Pokedex = () => {
@@ -31,39 +37,69 @@ const Pokedex = () => {
 
   return (
     <>
-      <AppBar position="static">
+      <Navigation>
         <Toolbar />
-      </AppBar>
+      </Navigation>
       {pokemonData ? (
         <Grid
           container
-          spacing={{ xs: 2, md: 3 }}
-          columns={{ xs: 4, sm: 8, md: 12 }}
+          spacing={2}
           sx={{
-            paddingTop: '20px',
-            paddingLeft: '50px',
-            paddingRight: '50px'
+            marginTop: '90px',
+            paddingLeft: '20px',
+            paddingRight: '20px',
+            paddingBottom: '20px',
+            justifyContent: 'center',
+            alignItems: 'center'
           }}
         >
           {pokemonData.map(({ data: { name, id, types } }) => (
-            <Grid item xs={2} sm={4} md={4} key={id}>
-              <PokeCard onClick={() => navigate(`/${id}`)}>
+            <Grid item xs={6} sm={5} md={5} lg={3} xl={2} key={id}>
+              <PokeCard
+                sx={{
+                  boxShadow: '0 3px 15px rgba(0, 0, 0, 0.089)',
+                  background: `linear-gradient(0deg, rgba(255,255,255,0) 0%, ${
+                    findColor(types[0].type.name)[1]
+                  } 100%)`
+                }}
+                onClick={() => navigate(`${id}`)}
+              >
+                <Typography
+                  variant="h6"
+                  sx={{
+                    marginTop: '10px',
+                    textAlign: 'center',
+                    opacity: '0.4'
+                  }}
+                >
+                  #{id}
+                </Typography>
                 <CardMedia
                   component="img"
                   image={getImageSourcefromID(id)}
-                  sx={{ width: '100px', height: '100px', margin: 'auto' }}
+                  sx={{
+                    width: '125px',
+                    height: '125px',
+                    margin: 'auto'
+                  }}
                 />
                 <CardContent sx={{ textAlign: 'center' }}>
-                  <Typography>{`${id}. ${toFirstCharUppercase(
-                    name
-                  )}`}</Typography>
+                  {[types[0]].map((type) => (
+                    <CardMedia
+                      component="img"
+                      key={type.type.name}
+                      image={getTypeIcon(type.type.name)[1]}
+                      sx={{ width: 35, height: 35, margin: 'auto' }}
+                    />
+                  ))}
+                  <Typography>{`${toFirstCharUppercase(name)}`}</Typography>
                 </CardContent>
               </PokeCard>
             </Grid>
           ))}
         </Grid>
       ) : (
-        <CircularProgress />
+        <FullPageSpinner />
       )}
     </>
   );
