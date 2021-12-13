@@ -1,18 +1,20 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Pokedex from './Pokedex';
-import Pokemon from './Pokemon';
+import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from '../styles/GlobalStyles';
+import { theme } from '../styles/theme';
+import Pokemon from './Pokemon';
+import Pokedex from './Pokedex';
 
 const Root = () => {
   return (
-    <div>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
       <Routes>
         <Route path="/" element={<Pokedex />} />
         <Route path="/:id" element={<Pokemon />} />
       </Routes>
-    </div>
+    </ThemeProvider>
   );
 };
 

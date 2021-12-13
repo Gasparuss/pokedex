@@ -53,22 +53,9 @@ export const usePokemons = () => {
     }
   }, []);
 
-  // const findPokemons = async (searchPhrase) => {
-  //   try {
-  //     const { data } = await axios.post(`/pokemons/search`, {
-  //       searchPhrase,
-  //     });
-  //     console.log(data);
-  //     return data;
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-
   return {
     getPokemons,
     getPokemon,
-    // findPokemons,
     getPokemonById,
     getPokemonSpecies,
     getPokemonEvolutionChain
