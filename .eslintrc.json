@@ -21,6 +21,8 @@
   },
   "plugins": ["react", "react-hooks", "prettier"],
   "rules": {
+    "no-unneeded-ternary": 0,
+    "react/jsx-no-useless-fragment": 0,
     "react/jsx-boolean-value": 0,
     "consistent-return": 0,
     "no-return-await": 0,

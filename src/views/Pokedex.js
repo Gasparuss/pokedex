@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import {
   Toolbar,
@@ -10,7 +11,6 @@ import {
 } from '@mui/material';
 
 import FullPageSpinner from '../components/FullPageSpinner/FullPageSpinner';
-import Navigation from '../components/Navigation/Navigation';
 import { PokeCard } from '../components/PokeCard/PokeCard';
 import {
   getImageSourcefromID,
@@ -37,26 +37,23 @@ const Pokedex = () => {
 
   return (
     <>
-      <Navigation>
-        <Toolbar />
-      </Navigation>
+      <h1>SearchBar</h1>
       {pokemonData ? (
         <Grid
           container
-          spacing={2}
+          columnSpacing={3}
+          rowSpacing={2}
           sx={{
-            marginTop: '90px',
-            paddingLeft: '20px',
-            paddingRight: '20px',
-            paddingBottom: '20px',
             justifyContent: 'center',
-            alignItems: 'center'
+            marginBottom: '15px'
           }}
         >
           {pokemonData.map(({ data: { name, id, types } }) => (
-            <Grid item xs={6} sm={5} md={5} lg={3} xl={2} key={id}>
+            <Grid item key={id}>
               <PokeCard
                 sx={{
+                  cursor: 'pointer',
+                  width: '300px',
                   boxShadow: '0 3px 15px rgba(0, 0, 0, 0.089)',
                   background: `linear-gradient(0deg, rgba(255,255,255,0) 0%, ${
                     findColor(types[0].type.name)[1]
@@ -67,6 +64,7 @@ const Pokedex = () => {
                 <Typography
                   variant="h6"
                   sx={{
+                    fontFamily: 'Montserrat',
                     marginTop: '10px',
                     textAlign: 'center',
                     opacity: '0.4'
@@ -92,7 +90,9 @@ const Pokedex = () => {
                       sx={{ width: 35, height: 35, margin: 'auto' }}
                     />
                   ))}
-                  <Typography>{`${toFirstCharUppercase(name)}`}</Typography>
+                  <Typography
+                    sx={{ fontFamily: 'Montserrat' }}
+                  >{`${toFirstCharUppercase(name)}`}</Typography>
                 </CardContent>
               </PokeCard>
             </Grid>

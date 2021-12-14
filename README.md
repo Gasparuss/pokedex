@@ -1,8 +1,10 @@
 Tech/framework used 🔧
 
 - React
-- React router dom
+- React Router
+- Hooks
 - Axios
 - Material UI
-- Eslint
-- Prettier
+- Tools: Webpack, Eslint, Prettier
+- Dato CMS
+- Styled-Compontens

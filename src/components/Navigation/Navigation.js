@@ -7,31 +7,6 @@ import ClefairyLogo from '../../assets/icons/clefairy.svg';
 import PikachuLogo from '../../assets/icons/pikachu.svg';
 import SnorlaxLogo from '../../assets/icons/snorlax.svg';
 
-const StyledItem = styled.div`
-  display: flex;
-  align-items: center;
-  min-width: 100px;
-  height: 100%;
-  flex-direction: column;
-  cursor: pointer;
-  &:hover {
-    background: ${({ theme, value }) => {
-      if (value === 'pokedex') return theme.colors.pokedex;
-      if (value === 'favourites') return theme.colors.electric;
-      if (value === 'clefairy') return theme.colors.fairy;
-      if (value === 'logout') return theme.colors.normal;
-      return theme.colors.grey;
-    }};
-    color: white;
-    transition: all 0.4s ease-out;
-  }
-
-  img {
-    height: 50px;
-    width: 50px;
-  }
-`;
-
 const StyledLink = styled(NavLink)`
   display: flex;
   flex-direction: column;
@@ -50,12 +25,41 @@ const StyledLink = styled(NavLink)`
   }
 `;
 
+const StyledItem = styled.div`
+  display: flex;
+  align-items: center;
+  min-width: 100px;
+  height: 90px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: bold;
+  &:hover {
+    background: ${({ theme, value }) => {
+      if (value === 'pokedex') return theme.colors.pokedex;
+      if (value === 'favourites') return theme.colors.electric;
+      if (value === 'clefairy') return theme.colors.fairy;
+      if (value === 'logout') return theme.colors.normal;
+      return theme.colors.grey;
+    }};
+    color: white;
+    transition: all 0.4s ease-out;
+  }
+
+  img {
+    height: 40px;
+    width: 40px;
+  }
+`;
+
 const Navigation = () => {
   return (
     <AppBar
       sx={{
+        position: 'sticky',
         backgroundColor: 'white',
-        display: 'flex',
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
