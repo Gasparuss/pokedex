@@ -1,15 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  Toolbar,
-  Grid,
-  CardContent,
-  CardMedia,
-  Typography,
-  AppBar
-} from '@mui/material';
-
+import { Grid, CardContent, CardMedia, Typography } from '@mui/material';
+import { PokemonsContext } from '../contextx/PokemonsProvider';
 import FullPageSpinner from '../components/FullPageSpinner/FullPageSpinner';
 import { PokeCard } from '../components/PokeCard/PokeCard';
 import {
@@ -18,22 +10,10 @@ import {
   getTypeIcon,
   findColor
 } from '../utils/GlobalFunctions';
-import { usePokemons } from '../hooks/usePokemons';
 
 const Pokedex = () => {
-  const [pokemonData, setPokemonData] = useState();
-  const { getPokemons, getPokemon } = usePokemons();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    (async () => {
-      const pokemon = await getPokemons();
-      const pokemonDetails = await Promise.all(
-        pokemon.map(async (p) => getPokemon(p.url))
-      );
-      setPokemonData(pokemonDetails);
-    })();
-  }, [getPokemon, getPokemons]);
+  const pokemonData = useContext(PokemonsContext);
 
   return (
     <>

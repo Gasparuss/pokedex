@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
 import axios from 'axios';
 import {
   CardActionArea,
@@ -8,6 +7,7 @@ import {
   Typography,
   Box
 } from '@mui/material';
+import { StyledWrapper } from './News.styles';
 import FullPageSpinner from '../components/FullPageSpinner/FullPageSpinner';
 
 export const query = `
@@ -48,20 +48,12 @@ const News = () => {
       });
   }, []);
 
-  const StyledWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    height: 90vh;
-  `;
-
   return (
     <StyledWrapper>
-      {articles.length > 0 && !error ? (
+      {articles ? (
         articles.map(({ title, content, image }) => (
           <CardActionArea
+            key={title}
             sx={{
               boxShadow: '0 3px 15px rgba(0, 0, 0, 0.089)',
               display: 'flex',

@@ -4,7 +4,6 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import PokeballLogo from '../../assets/icons/pokeball.svg';
 import ClefairyLogo from '../../assets/icons/clefairy.svg';
-import PikachuLogo from '../../assets/icons/pikachu.svg';
 import SnorlaxLogo from '../../assets/icons/snorlax.svg';
 
 const StyledLink = styled(NavLink)`
@@ -58,6 +57,7 @@ const Navigation = () => {
   return (
     <AppBar
       sx={{
+        width: '100vw',
         position: 'sticky',
         backgroundColor: 'white',
         flexDirection: 'row',
@@ -72,19 +72,13 @@ const Navigation = () => {
           Pokedex
         </StyledItem>
       </StyledLink>
-      <StyledLink value="favourites" to="/favourites">
-        <StyledItem value="favourites">
-          <img src={PikachuLogo} alt="pikachu-logo" />
-          Favourites
-        </StyledItem>
-      </StyledLink>
       <StyledLink value="clefairy" to="/news">
         <StyledItem value="clefairy">
           <img src={ClefairyLogo} alt="clefairy-logo" />
           News
         </StyledItem>
       </StyledLink>
-      <StyledLink value="logout" to="/logout">
+      <StyledLink value="logout" to="#">
         <StyledItem value="logout">
           <img src={SnorlaxLogo} alt="snorlax-logo" />
           Logout

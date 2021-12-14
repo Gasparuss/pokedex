@@ -8,3 +8,4 @@ Tech/framework used 🔧
 - Tools: Webpack, Eslint, Prettier
 - Dato CMS
 - Styled-Compontens
+- Prop Types

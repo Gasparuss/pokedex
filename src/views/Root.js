@@ -9,19 +9,22 @@ import News from './News';
 import Favourites from './Favourites';
 import '../assets/styles/fonts.css';
 import MainTemplate from '../components/MainTemplate/MainTemplate';
+import PokemonsProvider from '../contextx/PokemonsProvider';
 
 const Root = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <MainTemplate>
-        <Routes>
-          <Route path="/" element={<Navigate to="/pokedex" />} />
-          <Route path="/pokedex" element={<Pokedex />} />
-          <Route path="/pokedex/:id" element={<Pokemon />} />
-          <Route path="/favourites" element={<Favourites />} />
-          <Route path="/news" element={<News />} />
-        </Routes>
+        <PokemonsProvider>
+          <Routes>
+            <Route path="/" element={<Navigate to="/pokedex" />} />
+            <Route path="/pokedex" element={<Pokedex />} />
+            <Route path="/pokedex/:id" element={<Pokemon />} />
+            <Route path="/favourites" element={<Favourites />} />
+            <Route path="/news" element={<News />} />
+          </Routes>
+        </PokemonsProvider>
       </MainTemplate>
     </ThemeProvider>
   );
