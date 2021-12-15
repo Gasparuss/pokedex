@@ -2,9 +2,9 @@ import * as React from 'react';
 import { AppBar } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import PokeballLogo from '../../assets/icons/pokeball.svg';
-import ClefairyLogo from '../../assets/icons/clefairy.svg';
-import SnorlaxLogo from '../../assets/icons/snorlax.svg';
+import PokeballLogo from '../../../assets/icons/pokeball.svg';
+import ClefairyLogo from '../../../assets/icons/clefairy.svg';
+import SnorlaxLogo from '../../../assets/icons/snorlax.svg';
 
 const StyledLink = styled(NavLink)`
   display: flex;

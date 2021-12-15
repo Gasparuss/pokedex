@@ -12,11 +12,11 @@ export const GlobalStyle = createGlobalStyle`
   }
   
   body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Baloo Bhaijaan 2', cursive;
     margin: 0;
   }
   
   a, button {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Baloo Bhaijaan 2', cursive;
   }
 `;

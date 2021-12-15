@@ -1,19 +1,36 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Grid, CardContent, CardMedia, Typography } from '@mui/material';
-import { PokemonsContext } from '../contextx/PokemonsProvider';
-import FullPageSpinner from '../components/FullPageSpinner/FullPageSpinner';
-import { PokeCard } from '../components/PokeCard/PokeCard';
+import { Grid, CardContent, CardMedia } from '@mui/material';
+import { usePokemons } from '../../../hooks/usePokemons';
+import FullPageSpinner from '../../atoms/FullPageSpinner/FullPageSpinner';
+import { PokeCard } from '../../molecules/PokeCard/PokeCard';
+import { StyledTypography } from '../../atoms/Typography/Typography';
 import {
   getImageSourcefromID,
   toFirstCharUppercase,
   getTypeIcon,
   findColor
-} from '../utils/GlobalFunctions';
+} from '../../../utils/GlobalFunctions';
 
 const Pokedex = () => {
   const navigate = useNavigate();
-  const pokemonData = useContext(PokemonsContext);
+  const [isLoading, setIsLoading] = useState(null);
+  const { getPokemons, getPokemon } = usePokemons();
+  const [pokemonData, setPokemonData] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      setIsLoading(true);
+      const pokemons = await getPokemons();
+      const pokemonDetails = await Promise.all(
+        pokemons.map(async (p) => await getPokemon(p.url))
+      );
+      setPokemonData(pokemonDetails);
+      setIsLoading(false);
+    })();
+  }, [getPokemon, getPokemons]);
+
+  if (isLoading) return <FullPageSpinner />;
 
   return (
     <>
@@ -41,8 +58,8 @@ const Pokedex = () => {
                 }}
                 onClick={() => navigate(`${id}`)}
               >
-                <Typography
-                  variant="h6"
+                <StyledTypography
+                  variant="h5"
                   sx={{
                     fontFamily: 'Montserrat',
                     marginTop: '10px',
@@ -51,7 +68,7 @@ const Pokedex = () => {
                   }}
                 >
                   #{id}
-                </Typography>
+                </StyledTypography>
                 <CardMedia
                   component="img"
                   image={getImageSourcefromID(id)}
@@ -70,16 +87,16 @@ const Pokedex = () => {
                       sx={{ width: 35, height: 35, margin: 'auto' }}
                     />
                   ))}
-                  <Typography
-                    sx={{ fontFamily: 'Montserrat' }}
-                  >{`${toFirstCharUppercase(name)}`}</Typography>
+                  <StyledTypography variant="h5">{`${toFirstCharUppercase(
+                    name
+                  )}`}</StyledTypography>
                 </CardContent>
               </PokeCard>
             </Grid>
           ))}
         </Grid>
       ) : (
-        <FullPageSpinner />
+        <div>Sorry</div>
       )}
     </>
   );

@@ -8,7 +8,7 @@ import {
   Box
 } from '@mui/material';
 import { StyledWrapper } from './News.styles';
-import FullPageSpinner from '../components/FullPageSpinner/FullPageSpinner';
+import FullPageSpinner from '../components/atoms/FullPageSpinner/FullPageSpinner';
 
 export const query = `
          {
@@ -25,9 +25,11 @@ export const query = `
 
 const News = () => {
   const [articles, setArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(null);
   const [error, setError] = useState('');
 
   useEffect(() => {
+    setIsLoading(true);
     axios
       .post(
         'https://graphql.datocms.com/',
@@ -42,11 +44,17 @@ const News = () => {
       )
       .then(({ data: { data } }) => {
         setArticles(data.allArticles);
+        setIsLoading(false);
       })
       .catch(() => {
         setError("Sorry, we couldn't load articles for you");
       });
+    return () => {
+      setArticles(null);
+    };
   }, []);
+
+  if (isLoading) return <FullPageSpinner />;
 
   return (
     <StyledWrapper>
@@ -84,7 +92,7 @@ const News = () => {
           </CardActionArea>
         ))
       ) : (
-        <FullPageSpinner />
+        <div>Sorry try again later</div>
       )}
     </StyledWrapper>
   );

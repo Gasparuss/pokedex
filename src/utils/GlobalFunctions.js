@@ -64,3 +64,18 @@ export const getImageSourcefromID = (id) => {
 
 export const toFirstCharUppercase = (name) =>
   name.charAt(0).toUpperCase() + name.slice(1);
+
+export const extractEvolutionChain = (response) => {
+  let evoChain = [];
+  let evoData = response.chain;
+
+  do {
+    evoChain.push({
+      name: evoData.species.name,
+      url: evoData.species.url
+    });
+    evoData = evoData['evolves_to'][0];
+  } while (evoData && evoData.hasOwnProperty('evolves_to'));
+
+  return evoChain;
+};

@@ -1,12 +1,12 @@
 import React from 'react';
-import Navigation from '../Navigation/Navigation';
+import Navigation from '../../components/organisms/Navigation/Navigation';
 
 const MainTemplate = ({ children }) => {
   return (
-    <>
+    <div>
       <Navigation />
       {children}
-    </>
+    </div>
   );
 };
 
