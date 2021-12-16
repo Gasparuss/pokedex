@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Grid, CardMedia, Card, CardContent } from '@mui/material';
 import { usePokemons } from '../../../hooks/usePokemons';
 
@@ -50,8 +50,11 @@ const Pokemon = () => {
           container
           spacing={2}
           sx={{
+            alignItems: 'center',
             margin: '15px 0',
-            maxWidth: '1800px',
+            maxWidth: '1500px',
+            // height: '600px',
+            // maxHeight: '600px',
             boxShadow: '0 3px 15px rgba(0, 0, 0, 0.089)'
           }}
         >
@@ -113,12 +116,17 @@ const Pokemon = () => {
             <Grid
               item
               sx={{
-                flexDirection: 'column'
+                display: 'flex',
+                flexDirection: 'column',
+                width: '425px',
+                maxWidth: '425px'
               }}
             >
-              <CardContent sx={{ border: '1px solid brown' }}>
+              <CardContent sx={{}}>
                 <StyledTypography variant="h5">Biography</StyledTypography>
-                <pre>{pokemonSpecies.flavor_text_entries[10].flavor_text}</pre>
+                <pre style={{ fontSize: ' 15px' }}>
+                  {pokemonSpecies.flavor_text_entries[10].flavor_text}
+                </pre>
 
                 <StyledTypography
                   sx={{
@@ -208,9 +216,7 @@ const Pokemon = () => {
             <Grid
               container
               sx={{
-                gap: '15px',
-                flexDirection: 'column',
-                maxWidth: '600px',
+                maxWidth: '500px',
                 padding: '15px'
               }}
             >
@@ -300,7 +306,7 @@ const Pokemon = () => {
                     }}
                   >
                     <StyledTypography
-                      style={{
+                      sx={{
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
@@ -311,7 +317,7 @@ const Pokemon = () => {
                       <span> {pokemon.stats[0].base_stat}</span>
                     </StyledTypography>
                     <StyledTypography
-                      style={{
+                      sx={{
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
@@ -322,7 +328,7 @@ const Pokemon = () => {
                       <span> {pokemon.stats[0].base_stat}</span>
                     </StyledTypography>
                     <StyledTypography
-                      style={{
+                      sx={{
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
@@ -333,7 +339,7 @@ const Pokemon = () => {
                       <span> {pokemon.stats[0].base_stat}</span>
                     </StyledTypography>
                     <StyledTypography
-                      style={{
+                      sx={{
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
@@ -356,7 +362,7 @@ const Pokemon = () => {
                       <span> {pokemon.stats[0].base_stat}</span>
                     </StyledTypography>
                     <StyledTypography
-                      style={{
+                      sx={{
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
