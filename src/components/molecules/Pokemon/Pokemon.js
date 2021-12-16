@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Grid, CardMedia, Card, CardContent } from '@mui/material';
 import { usePokemons } from '../../../hooks/usePokemons';
+
 import {
   extractEvolutionChain,
   getImageSourcefromID,
   getTypeIcon,
   toFirstCharUppercase,
-  findColor
+  findColor,
+  getIDStringfromURLEvolution,
+  getImageSourceFromURL
 } from '../../../utils/GlobalFunctions';
-import { StyledWrapper } from './Pokemon.styles';
+import { StyledWrapper, StyledCardMedia } from './Pokemon.styles';
 import { StyledTypography } from '../../atoms/Typography/Typography';
 import FullPageSpinner from '../../atoms/FullPageSpinner/FullPageSpinner';
 
@@ -40,86 +43,83 @@ const Pokemon = () => {
 
   if (isLoading) return <FullPageSpinner />;
 
-  console.log(evolutionChain);
-
   return (
     <StyledWrapper>
       {pokemon ? (
         <Grid
           container
+          spacing={2}
           sx={{
-            maxWidth: '1300px',
-            padding: '30px',
-            flexWrap: 'wrap',
-            marginTop: '15px',
-            justifyContent: 'space-around',
-            marginBottom: '15px'
+            margin: '15px 0',
+            maxWidth: '1800px',
+            boxShadow: '0 3px 15px rgba(0, 0, 0, 0.089)'
           }}
         >
           <Grid
-            item
+            container
             sx={{
-              // minWidth: '400px',
-              height: '100%'
+              padding: '15px',
+              justifyContent: 'space-around'
             }}
           >
-            <Card
+            <Grid
+              item
               sx={{
-                maxWidth: '500px',
-                height: '100%',
-                boxShadow: '0 3px 15px rgba(0, 0, 0, 0.089)',
-                background: `linear-gradient(0deg, rgba(255,255,255,0) 0%, ${
-                  findColor(pokemon.types[0].type.name)[1]
-                } 100%)`
+                maxWidth: '400px',
+                width: '450px',
+                maxHeight: '500px'
               }}
             >
-              <StyledTypography
-                variant="h4"
+              <Card
                 sx={{
-                  marginTop: '10px',
-                  textAlign: 'center',
-                  opacity: '0.4'
+                  maxWidth: '500px',
+                  height: '100%',
+                  boxShadow: '0 3px 15px rgba(0, 0, 0, 0.089)',
+                  background: `linear-gradient(0deg, rgba(255,255,255,0) 0%, ${
+                    findColor(pokemon.types[0].type.name)[1]
+                  } 100%)`
                 }}
               >
-                #{id}
-              </StyledTypography>
-              <CardMedia
-                component="img"
-                image={getImageSourcefromID(id)}
-                sx={{
-                  width: '300px',
-                  margin: 'auto'
-                }}
-              />
-              <CardContent sx={{ textAlign: 'center' }}>
+                <StyledTypography
+                  variant="h4"
+                  sx={{
+                    marginTop: '10px',
+                    textAlign: 'center',
+                    opacity: '0.4'
+                  }}
+                >
+                  #{id}
+                </StyledTypography>
                 <CardMedia
                   component="img"
-                  image={getTypeIcon(pokemon.types[0].type.name)[1]}
-                  sx={{ width: 35, height: 35, margin: 'auto' }}
+                  image={getImageSourcefromID(id)}
+                  sx={{
+                    width: '300px',
+                    margin: 'auto'
+                  }}
                 />
-                <StyledTypography variant="h5">{`${toFirstCharUppercase(
-                  pokemon.name
-                )}`}</StyledTypography>
-              </CardContent>
-            </Card>
-          </Grid>
-          <Grid
-            item
-            sx={{
-              flexDirection: 'column'
-            }}
-          >
-            <Card
+                <CardContent sx={{ textAlign: 'center' }}>
+                  <CardMedia
+                    component="img"
+                    image={getTypeIcon(pokemon.types[0].type.name)[1]}
+                    sx={{ width: 35, height: 35, margin: 'auto' }}
+                  />
+                  <StyledTypography variant="h5">{`${toFirstCharUppercase(
+                    pokemon.name
+                  )}`}</StyledTypography>
+                </CardContent>
+              </Card>
+            </Grid>
+            <Grid
+              item
               sx={{
-                border: '1px solid red',
-                boxShadow: '0 3px 15px rgba(0, 0, 0, 0.089)'
+                flexDirection: 'column'
               }}
             >
-              <CardContent>
+              <CardContent sx={{ border: '1px solid brown' }}>
                 <StyledTypography variant="h5">Biography</StyledTypography>
-                <span>
-                  {pokemonSpecies.flavor_text_entries[10].flavor_text}
-                </span>
+                <pre>{pokemonSpecies.flavor_text_entries[10].flavor_text}</pre>
+
                 <StyledTypography
                   sx={{
                     display: 'flex',
@@ -203,7 +203,173 @@ const Pokemon = () => {
                   <span>{pokemonSpecies.growth_rate.name}</span>
                 </StyledTypography>
               </CardContent>
-            </Card>
+            </Grid>
+
+            <Grid
+              container
+              sx={{
+                gap: '15px',
+                flexDirection: 'column',
+                maxWidth: '600px',
+                padding: '15px'
+              }}
+            >
+              <StyledTypography variant="h5">Evolutions</StyledTypography>
+              <Grid
+                container
+                sx={{
+                  alignItems: 'center',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  gap: '15px'
+                }}
+              >
+                {evolutionChain ? (
+                  evolutionChain.map(({ name, url }) => (
+                    <Grid
+                      item
+                      sx={{ display: 'flex', flexDirection: 'column' }}
+                    >
+                      <StyledTypography
+                        sx={{
+                          textAlign: 'center'
+                        }}
+                      >
+                        #{getIDStringfromURLEvolution(url)}
+                      </StyledTypography>
+                      <Link to={`/pokedex/${getIDStringfromURLEvolution(url)}`}>
+                        <StyledCardMedia
+                          component="img"
+                          image={getImageSourceFromURL(url)}
+                          sx={{
+                            width: 100,
+                            height: 100,
+                            borderRadius: '50%',
+                            padding: '15px',
+                            background: `linear-gradient(0deg, rgba(255,255,255,0) 0%, ${
+                              findColor(pokemon.types[0].type.name)[1]
+                            } 100%)`
+                          }}
+                        />
+                      </Link>
+                      <StyledTypography sx={{ textAlign: 'center' }}>
+                        {toFirstCharUppercase(name)}
+                      </StyledTypography>
+                    </Grid>
+                  ))
+                ) : (
+                  <div>Sorki nie mozna wczytac ewolucji co nie :D</div>
+                )}
+              </Grid>
+              <Grid
+                container
+                sx={{
+                  marginTop: '45px',
+
+                  justifyContent: 'center'
+                }}
+              >
+                <Grid
+                  container
+                  sx={{
+                    paddingLeft: '5px',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flexDirection: 'column'
+                  }}
+                >
+                  <StyledTypography
+                    variant="h5"
+                    sx={{
+                      textAlign: 'start',
+                      width: '100%'
+                    }}
+                  >
+                    Stats
+                  </StyledTypography>
+
+                  <Grid
+                    item
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      maxWidth: '250px',
+                      flexWrap: 'wrap',
+                      gap: '10px'
+                    }}
+                  >
+                    <StyledTypography
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        width: '60px'
+                      }}
+                    >
+                      <b>HP</b>
+                      <span> {pokemon.stats[0].base_stat}</span>
+                    </StyledTypography>
+                    <StyledTypography
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        width: '60px'
+                      }}
+                    >
+                      <b>Atk</b>
+                      <span> {pokemon.stats[0].base_stat}</span>
+                    </StyledTypography>
+                    <StyledTypography
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        width: '60px'
+                      }}
+                    >
+                      <b>Def</b>
+                      <span> {pokemon.stats[0].base_stat}</span>
+                    </StyledTypography>
+                    <StyledTypography
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        width: '60px'
+                      }}
+                    >
+                      <b>Sp. Atk</b>
+                      <span> {pokemon.stats[0].base_stat}</span>
+                    </StyledTypography>
+                    <StyledTypography
+                      sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        width: '60px'
+                      }}
+                    >
+                      <b>Sp. Def</b>
+                      <span> {pokemon.stats[0].base_stat}</span>
+                    </StyledTypography>
+                    <StyledTypography
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        width: '60px'
+                      }}
+                    >
+                      <b>Speed</b>
+                      <span> {pokemon.stats[0].base_stat}</span>
+                    </StyledTypography>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
       ) : (

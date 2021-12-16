@@ -79,3 +79,25 @@ export const extractEvolutionChain = (response) => {
 
   return evoChain;
 };
+
+export const getIDStringfromURLEvolution = (url) => {
+  const tempURL = url.split('/');
+  const id = +tempURL[tempURL.length - 2];
+  if (id >= 10 && id < 100) return id;
+  if (id >= 100) return `${id}`;
+  return id;
+};
+
+export const getIDStringfromURL = (url) => {
+  const tempURL = url.split('/');
+  const id = +tempURL[tempURL.length - 2];
+  if (id >= 10 && id < 100) return `0${id}`;
+  if (id >= 100) return `${id}`;
+  return `00${id}`;
+};
+
+export const getImageSourceFromURL = (id) => {
+  return `https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${getIDStringfromURL(
+    id
+  )}.png`;
+};
