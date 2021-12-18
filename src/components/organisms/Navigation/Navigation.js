@@ -57,7 +57,7 @@ const Navigation = () => {
   return (
     <AppBar
       sx={{
-        width: '100vw',
+        maxWidth: '100vw',
         position: 'sticky',
         backgroundColor: 'white',
         flexDirection: 'row',

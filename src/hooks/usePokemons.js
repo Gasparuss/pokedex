@@ -4,12 +4,23 @@ import axios from 'axios';
 export const usePokemons = () => {
   const getPokemons = useCallback(async () => {
     try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/pokemon?limit=300`
+      const results = await axios.get(
+        `${process.env.REACT_APP_API_URL}/pokemon?limit=100`
       );
-      return data.results;
+      return results.data;
     } catch (e) {
-      throw new Error(e);
+      throw new Error('Sorry, try again later', e);
+    }
+  }, []);
+
+  const getPokemonById = useCallback(async (id) => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_API_URL}/pokemon/${id}`
+      );
+      return data;
+    } catch (e) {
+      throw new Error('Sorry, try again later', e);
     }
   }, []);
 
@@ -22,17 +33,6 @@ export const usePokemons = () => {
     }
   }, []);
 
-  const getPokemonById = useCallback(async (id) => {
-    try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/pokemon/${id}`
-      );
-      return data;
-    } catch (e) {
-      throw new Error(e);
-    }
-  }, []);
-
   const getPokemonSpecies = useCallback(async (id) => {
     try {
       const { data } = await axios.get(
@@ -40,7 +40,7 @@ export const usePokemons = () => {
       );
       return data;
     } catch (e) {
-      throw new Error(e);
+      throw new Error('Sorry, try again later', e);
     }
   }, []);
 
@@ -49,7 +49,7 @@ export const usePokemons = () => {
       const { data } = await axios.get(url);
       return data;
     } catch (e) {
-      throw new Error(e);
+      throw new Error('Sorry, try again later', e);
     }
   }, []);
 

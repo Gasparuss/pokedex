@@ -53,8 +53,6 @@ const Pokemon = () => {
             alignItems: 'center',
             margin: '15px 0',
             maxWidth: '1500px',
-            // height: '600px',
-            // maxHeight: '600px',
             boxShadow: '0 3px 15px rgba(0, 0, 0, 0.089)'
           }}
         >
@@ -234,6 +232,7 @@ const Pokemon = () => {
                   evolutionChain.map(({ name, url }) => (
                     <Grid
                       item
+                      key={name}
                       sx={{ display: 'flex', flexDirection: 'column' }}
                     >
                       <StyledTypography
