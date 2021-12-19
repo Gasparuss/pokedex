@@ -1,31 +1,52 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid, Toolbar, TextField } from '@mui/material';
+import axios from 'axios';
+import Pagination from '../../atoms/Pagination/Pagination';
 import { usePokemons } from '../../../hooks/usePokemons';
 import FullPageSpinner from '../../atoms/FullPageSpinner/FullPageSpinner';
 import PokemonsListItem from '../../molecules/PokemonsListItem/PokemonsListItem';
 
 const Pokedex = () => {
   const [isLoading, setIsLoading] = useState(null);
-  const { getPokemons, getPokemon, getPokemonsList } = usePokemons();
+  const { getPokemon, getPokemons } = usePokemons();
   const [pokemonData, setPokemonData] = useState([]);
-  const [pokemonList, setPokemonList] = useState([]);
+  const [currentPageUrl, setCurrentPageUrl] = useState(
+    'https://pokeapi.co/api/v2/pokemon'
+  );
+  const [nextPageUrl, setNextPageUrl] = useState();
+  const [prevPageUrl, setPrevPageUrl] = useState();
   const [filter, setFilter] = useState('');
+
+  useEffect(() => {
+    (async () => {
+      setIsLoading(true);
+      try {
+        const pokemons = await axios.get(currentPageUrl);
+        const pokemonDetails = await Promise.all(
+          pokemons.data.results.map(async (p) => await getPokemon(p.url))
+        );
+        setPokemonData(pokemonDetails);
+        setNextPageUrl(pokemons.data.next);
+        setPrevPageUrl(pokemons.data.previous);
+      } catch (e) {
+        throw new Error('Sorry, try again later', e);
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  }, [currentPageUrl, getPokemon]);
 
   const handleSearchChange = (e) => {
     setFilter(e.target.value);
   };
 
-  useEffect(() => {
-    (async () => {
-      setIsLoading(true);
-      const pokemons = await getPokemons();
-      const pokemonDetails = await Promise.all(
-        pokemons.results.map(async (p) => await getPokemon(p.url))
-      );
-      setPokemonData(pokemonDetails);
-      setIsLoading(false);
-    })();
-  }, [getPokemon, getPokemons]);
+  function gotoNextPage() {
+    setCurrentPageUrl(nextPageUrl);
+  }
+
+  function gotoPrevPage() {
+    setCurrentPageUrl(prevPageUrl);
+  }
 
   if (isLoading) return <FullPageSpinner />;
 
@@ -58,8 +79,12 @@ const Pokedex = () => {
           )}
         </Grid>
       ) : (
-        <div>enougn</div>
+        <div>enougnh</div>
       )}
+      <Pagination
+        gotoNextPage={nextPageUrl ? gotoNextPage : null}
+        gotoPrevPage={prevPageUrl ? gotoPrevPage : null}
+      />
     </>
   );
 };

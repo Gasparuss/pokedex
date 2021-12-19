@@ -5,7 +5,7 @@ export const usePokemons = () => {
   const getPokemons = useCallback(async () => {
     try {
       const results = await axios.get(
-        `${process.env.REACT_APP_API_URL}/pokemon?limit=100`
+        `${process.env.REACT_APP_API_URL}/pokemon?limit=150`
       );
       return results.data;
     } catch (e) {
