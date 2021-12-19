@@ -264,7 +264,7 @@ const Pokemon = () => {
                     </Grid>
                   ))
                 ) : (
-                  <div>Sorki nie mozna wczytac ewolucji co nie :D</div>
+                  <div>Sorry, can/t load pokemon evolution chain</div>
                 )}
               </Grid>
               <Grid
@@ -379,7 +379,7 @@ const Pokemon = () => {
           </Grid>
         </Grid>
       ) : (
-        <div>PRZEPRASZAMY NEI MOZNA WCZYTAC DANYCH</div>
+        <div style={{ color: 'red' }}>Sorry, can/t load pokemon details</div>
       )}
     </StyledWrapper>
   );

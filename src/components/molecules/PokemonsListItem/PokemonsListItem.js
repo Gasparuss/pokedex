@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { Grid, CardMedia, CardContent } from '@mui/material';
+import { PokemonsShape } from '../../../types';
 import { PokeCard } from '../../atoms/PokeCard/PokeCard';
 import {
   findColor,
@@ -63,6 +65,10 @@ const PokemonsListItem = ({ pokemonData: { name, id, types } }) => {
       </Grid>
     </>
   );
+};
+
+PokemonsListItem.propTypes = {
+  pokemonData: PropTypes.shape(PokemonsShape).isRequired
 };
 
 export default PokemonsListItem;

@@ -9,7 +9,7 @@ export const usePokemons = () => {
       );
       return data;
     } catch (e) {
-      throw new Error('Sorry, we can"t find pokemon by id', e);
+      throw new Error('Sorry, can"t find pokemon by id', e);
     }
   }, []);
 
@@ -18,7 +18,7 @@ export const usePokemons = () => {
       const result = axios.get(url);
       return result;
     } catch (e) {
-      throw new Error(e);
+      throw new Error('Sorry, can"t find pokemon by url', e);
     }
   }, []);
 
@@ -29,7 +29,7 @@ export const usePokemons = () => {
       );
       return data;
     } catch (e) {
-      throw new Error('Sorry, we can"t find pokemon species by id', e);
+      throw new Error('Sorry, can"t find pokemon species by id', e);
     }
   }, []);
 
@@ -38,7 +38,7 @@ export const usePokemons = () => {
       const { data } = await axios.get(url);
       return data;
     } catch (e) {
-      throw new Error('Sorry, try again later', e);
+      throw new Error('Sorry, can"t find evolution chain by url', e);
     }
   }, []);
 

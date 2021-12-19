@@ -29,7 +29,7 @@ const Pokedex = () => {
         setNextPageUrl(pokemons.data.next);
         setPrevPageUrl(pokemons.data.previous);
       } catch (e) {
-        throw new Error('Sorry, try again later', e);
+        throw new Error('Sorry, can"t load pokemons', e);
       } finally {
         setIsLoading(false);
       }
