@@ -5,11 +5,11 @@ export const usePokemons = () => {
   const getPokemonById = useCallback(async (id) => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/pokemon/${id}`
+        `https://pokeapi.co/api/v2/pokemon/${id}`
       );
       return data;
     } catch (e) {
-      throw new Error('Sorry, try again later', e);
+      throw new Error('Sorry, we can"t find pokemon by id', e);
     }
   }, []);
 
@@ -25,11 +25,11 @@ export const usePokemons = () => {
   const getPokemonSpecies = useCallback(async (id) => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_API_URL}/pokemon-species/${id}`
+        `https://pokeapi.co/api/v2/pokemon-species/${id}`
       );
       return data;
     } catch (e) {
-      throw new Error('Sorry, try again later', e);
+      throw new Error('Sorry, we can"t find pokemon species by id', e);
     }
   }, []);
 

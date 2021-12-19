@@ -16,7 +16,6 @@ const StyledLink = styled(NavLink)`
     border-bottom: 1px solid
       ${({ theme, value }) => {
         if (value === 'pokedex') return theme.colors.pokedex;
-        if (value === 'logout') return true;
       }};
   }
 `;
@@ -35,7 +34,6 @@ const StyledItem = styled.div`
   &:hover {
     background: ${({ theme, value }) => {
       if (value === 'pokedex') return theme.colors.pokedex;
-      if (value === 'logout') return theme.colors.normal;
       return theme.colors.grey;
     }};
     color: white;
@@ -65,12 +63,6 @@ const Navigation = () => {
         <StyledItem value="pokedex">
           <img src={PokeballLogo} alt="pokeball-logo" />
           Pokedex
-        </StyledItem>
-      </StyledLink>
-      <StyledLink value="logout" to="#">
-        <StyledItem value="logout">
-          <img src={SnorlaxLogo} alt="snorlax-logo" />
-          Logout
         </StyledItem>
       </StyledLink>
     </AppBar>

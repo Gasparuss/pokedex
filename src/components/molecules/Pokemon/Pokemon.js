@@ -19,6 +19,7 @@ import FullPageSpinner from '../../atoms/FullPageSpinner/FullPageSpinner';
 const Pokemon = () => {
   const [pokemon, setPokemon] = useState();
   const [pokemonSpecies, setPokemonSpecies] = useState([]);
+  const [evolutionChain, setEvolutionChain] = useState([]);
 
   const [isLoading, setIsLoading] = useState(null);
   const { getPokemonEvolutionChain, getPokemonSpecies, getPokemonById } =
@@ -30,12 +31,16 @@ const Pokemon = () => {
       setIsLoading(true);
       const pokemonData = await getPokemonById(id);
       const pokemonSpeciesData = await getPokemonSpecies(id);
-
+      const pokemonEvolutionChain = await getPokemonEvolutionChain(
+        pokemonSpeciesData.evolution_chain.url
+      );
+      const evolutionData = extractEvolutionChain(pokemonEvolutionChain);
+      setEvolutionChain(evolutionData);
       setPokemonSpecies(pokemonSpeciesData);
       setPokemon(pokemonData);
       setIsLoading(false);
     })();
-  }, [getPokemonById, getPokemonSpecies, id]);
+  }, [getPokemonById, getPokemonEvolutionChain, getPokemonSpecies, id]);
 
   if (isLoading) return <FullPageSpinner />;
 
@@ -224,7 +229,43 @@ const Pokemon = () => {
                   gap: '15px'
                 }}
               >
-                <div>Hello world</div>
+                {evolutionChain ? (
+                  evolutionChain.map(({ name, url }) => (
+                    <Grid
+                      item
+                      key={name}
+                      sx={{ display: 'flex', flexDirection: 'column' }}
+                    >
+                      <StyledTypography
+                        sx={{
+                          textAlign: 'center'
+                        }}
+                      >
+                        #{getIDStringfromURLEvolution(url)}
+                      </StyledTypography>
+                      <Link to={`/pokedex/${getIDStringfromURLEvolution(url)}`}>
+                        <StyledCardMedia
+                          component="img"
+                          image={getImageSourceFromURL(url)}
+                          sx={{
+                            width: 100,
+                            height: 100,
+                            borderRadius: '50%',
+                            padding: '15px',
+                            background: `linear-gradient(0deg, rgba(255,255,255,0) 0%, ${
+                              findColor(pokemon.types[0].type.name)[1]
+                            } 100%)`
+                          }}
+                        />
+                      </Link>
+                      <StyledTypography sx={{ textAlign: 'center' }}>
+                        {toFirstCharUppercase(name)}
+                      </StyledTypography>
+                    </Grid>
+                  ))
+                ) : (
+                  <div>Sorki nie mozna wczytac ewolucji co nie :D</div>
+                )}
               </Grid>
               <Grid
                 container
