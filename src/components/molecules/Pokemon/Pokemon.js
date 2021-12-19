@@ -325,7 +325,7 @@ export const Pokemon = () => {
                       }}
                     >
                       <b>Atk</b>
-                      <span> {pokemon.stats[0].base_stat}</span>
+                      <span> {pokemon.stats[1].base_stat}</span>
                     </StyledTypography>
                     <StyledTypography
                       sx={{
@@ -336,7 +336,7 @@ export const Pokemon = () => {
                       }}
                     >
                       <b>Def</b>
-                      <span> {pokemon.stats[0].base_stat}</span>
+                      <span> {pokemon.stats[2].base_stat}</span>
                     </StyledTypography>
                     <StyledTypography
                       sx={{
@@ -347,7 +347,7 @@ export const Pokemon = () => {
                       }}
                     >
                       <b>Sp. Atk</b>
-                      <span> {pokemon.stats[0].base_stat}</span>
+                      <span> {pokemon.stats[3].base_stat}</span>
                     </StyledTypography>
                     <StyledTypography
                       sx={{
@@ -359,7 +359,7 @@ export const Pokemon = () => {
                       }}
                     >
                       <b>Sp. Def</b>
-                      <span> {pokemon.stats[0].base_stat}</span>
+                      <span> {pokemon.stats[4].base_stat}</span>
                     </StyledTypography>
                     <StyledTypography
                       sx={{
@@ -370,7 +370,7 @@ export const Pokemon = () => {
                       }}
                     >
                       <b>Speed</b>
-                      <span> {pokemon.stats[0].base_stat}</span>
+                      <span> {pokemon.stats[5].base_stat}</span>
                     </StyledTypography>
                   </Grid>
                 </Grid>

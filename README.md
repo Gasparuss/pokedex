@@ -2,7 +2,7 @@
 
 Pokedex app. I used <a href="https://bradfrost.com/blog/post/atomic-web-design">
 Atomic Design</a> for components architecture.
-You can search for a pokemon by name or by clicking the button next to the bottom of the page. 
+You can search for a pokemon by name or by clicking the button next to the bottom of the page.
 
 ## Tech/framework used 🔧
 
@@ -23,7 +23,7 @@ You can search for a pokemon by name or by clicking the button next to the botto
 </p>
 
 <p aling="center">
-	<img width="100%" src="https://i.ibb.co/vqCdtyM/pikachu-screenshot.png" />
+	<img width="100%" src="https://i.ibb.co/T4cHPY2/pokemon-details.png" />
 </p>
 
 ## Code Example/Issues 🔍
