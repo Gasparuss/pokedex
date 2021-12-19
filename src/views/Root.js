@@ -5,7 +5,6 @@ import { GlobalStyle } from '../assets/styles/GlobalStyles';
 import { theme } from '../assets/styles/theme';
 import Pokemon from '../components/molecules/Pokemon/Pokemon';
 import PokemonsList from '../components/organisms/PokemonsList/PokemonsList';
-import News from './News';
 import '../assets/styles/fonts.css';
 import MainTemplate from '../templates/MainTemplate/MainTemplate';
 
@@ -18,7 +17,6 @@ const Root = () => {
           <Route path="/" element={<Navigate to="/pokedex" />} />
           <Route path="/pokedex" element={<PokemonsList />} />
           <Route path="/pokedex/:id" element={<Pokemon />} />
-          <Route path="/news" element={<News />} />
         </Routes>
       </MainTemplate>
     </ThemeProvider>

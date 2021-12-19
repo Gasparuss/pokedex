@@ -8,7 +8,7 @@ import PokemonsListItem from '../../molecules/PokemonsListItem/PokemonsListItem'
 
 const Pokedex = () => {
   const [isLoading, setIsLoading] = useState(null);
-  const { getPokemon, getPokemons } = usePokemons();
+  const { getPokemon } = usePokemons();
   const [pokemonData, setPokemonData] = useState([]);
   const [currentPageUrl, setCurrentPageUrl] = useState(
     'https://pokeapi.co/api/v2/pokemon'
@@ -40,13 +40,13 @@ const Pokedex = () => {
     setFilter(e.target.value);
   };
 
-  function gotoNextPage() {
+  const handleNextClick = () => {
     setCurrentPageUrl(nextPageUrl);
-  }
+  };
 
-  function gotoPrevPage() {
+  const handlePrevClick = () => {
     setCurrentPageUrl(prevPageUrl);
-  }
+  };
 
   if (isLoading) return <FullPageSpinner />;
 
@@ -79,11 +79,13 @@ const Pokedex = () => {
           )}
         </Grid>
       ) : (
-        <div>enougnh</div>
+        <div style={{ color: 'red' }}>
+          Something went wrong, please try again later
+        </div>
       )}
       <Pagination
-        gotoNextPage={nextPageUrl ? gotoNextPage : null}
-        gotoPrevPage={prevPageUrl ? gotoPrevPage : null}
+        handleNextClick={nextPageUrl ? handleNextClick : null}
+        handlePrevClick={prevPageUrl ? handlePrevClick : null}
       />
     </>
   );

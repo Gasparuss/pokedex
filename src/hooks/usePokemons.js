@@ -2,17 +2,6 @@ import { useCallback } from 'react';
 import axios from 'axios';
 
 export const usePokemons = () => {
-  const getPokemons = useCallback(async () => {
-    try {
-      const results = await axios.get(
-        `${process.env.REACT_APP_API_URL}/pokemon?limit=150`
-      );
-      return results.data;
-    } catch (e) {
-      throw new Error('Sorry, try again later', e);
-    }
-  }, []);
-
   const getPokemonById = useCallback(async (id) => {
     try {
       const { data } = await axios.get(
@@ -54,7 +43,6 @@ export const usePokemons = () => {
   }, []);
 
   return {
-    getPokemons,
     getPokemon,
     getPokemonById,
     getPokemonSpecies,

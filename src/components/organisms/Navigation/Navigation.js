@@ -3,7 +3,6 @@ import { AppBar } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import PokeballLogo from '../../../assets/icons/pokeball.svg';
-import ClefairyLogo from '../../../assets/icons/clefairy.svg';
 import SnorlaxLogo from '../../../assets/icons/snorlax.svg';
 
 const StyledLink = styled(NavLink)`
@@ -17,8 +16,6 @@ const StyledLink = styled(NavLink)`
     border-bottom: 1px solid
       ${({ theme, value }) => {
         if (value === 'pokedex') return theme.colors.pokedex;
-        if (value === 'favourites') return theme.colors.electric;
-        if (value === 'clefairy') return theme.colors.fairy;
         if (value === 'logout') return true;
       }};
   }
@@ -38,8 +35,6 @@ const StyledItem = styled.div`
   &:hover {
     background: ${({ theme, value }) => {
       if (value === 'pokedex') return theme.colors.pokedex;
-      if (value === 'favourites') return theme.colors.electric;
-      if (value === 'clefairy') return theme.colors.fairy;
       if (value === 'logout') return theme.colors.normal;
       return theme.colors.grey;
     }};
@@ -70,12 +65,6 @@ const Navigation = () => {
         <StyledItem value="pokedex">
           <img src={PokeballLogo} alt="pokeball-logo" />
           Pokedex
-        </StyledItem>
-      </StyledLink>
-      <StyledLink value="clefairy" to="/news">
-        <StyledItem value="clefairy">
-          <img src={ClefairyLogo} alt="clefairy-logo" />
-          News
         </StyledItem>
       </StyledLink>
       <StyledLink value="logout" to="#">

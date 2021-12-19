@@ -2,11 +2,15 @@ import React from 'react';
 import Stack from '@mui/material/Stack';
 import { StyledButton } from '../Button/Button';
 
-const Pagination = ({ gotoPrevPage, gotoNextPage }) => {
+const Pagination = ({ handlePrevClick, handleNextClick }) => {
   return (
     <Stack spacing={2} direction="row" sx={{ justifyContent: 'center' }}>
-      {gotoPrevPage && <StyledButton onClick={gotoPrevPage}>Prev</StyledButton>}
-      {gotoNextPage && <StyledButton onClick={gotoNextPage}>Next</StyledButton>}
+      {handlePrevClick && (
+        <StyledButton onClick={handlePrevClick}>Prev</StyledButton>
+      )}
+      {handleNextClick && (
+        <StyledButton onClick={handleNextClick}>Next</StyledButton>
+      )}
     </Stack>
   );
 };
