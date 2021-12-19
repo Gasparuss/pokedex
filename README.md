@@ -18,7 +18,7 @@ You can search for a pokemon by name or by clicking the button next to the botto
 ## Screenshots 📺
 
 <p align="center">
-	<img width="100%" src="https://i.ibb.co/PrgWQ8n/s.png" />
+	<img width="100%" src="https://i.ibb.co/PrgWQ8n/pokedex.png" />
 </p>
 
 <p aling="center">
