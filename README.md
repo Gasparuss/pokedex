@@ -12,7 +12,6 @@ You can search for a pokemon by name or by clicking the button next to the botto
 - Axios
 - Material UI
 - Tools: Webpack, Eslint, Prettier
-- Dato CMS
 - Styled-Compontens
 - Prop Types
 
