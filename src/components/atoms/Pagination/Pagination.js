@@ -2,7 +2,7 @@ import React from 'react';
 import Stack from '@mui/material/Stack';
 import { StyledButton } from '../Button/Button';
 
-const Pagination = ({ handlePrevClick, handleNextClick }) => {
+export const Pagination = ({ handlePrevClick, handleNextClick }) => {
   return (
     <Stack spacing={2} direction="row" sx={{ justifyContent: 'center' }}>
       {handlePrevClick && (
@@ -14,5 +14,3 @@ const Pagination = ({ handlePrevClick, handleNextClick }) => {
     </Stack>
   );
 };
-
-export default Pagination;

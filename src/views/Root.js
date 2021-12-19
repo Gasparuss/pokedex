@@ -3,10 +3,10 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle } from '../assets/styles/GlobalStyles';
 import { theme } from '../assets/styles/theme';
-import Pokemon from '../components/molecules/Pokemon/Pokemon';
-import PokemonsList from '../components/organisms/PokemonsList/PokemonsList';
+import { Pokemon } from '../components/molecules/Pokemon/Pokemon';
+import { PokemonsList } from '../components/organisms/PokemonsList/PokemonsList';
 import '../assets/styles/fonts.css';
-import MainTemplate from '../templates/MainTemplate/MainTemplate';
+import { MainTemplate } from '../templates/MainTemplate/MainTemplate';
 
 const Root = () => {
   return (

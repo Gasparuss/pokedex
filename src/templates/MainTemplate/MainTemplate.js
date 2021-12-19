@@ -1,7 +1,7 @@
 import React from 'react';
-import Navigation from '../../components/organisms/Navigation/Navigation';
+import { Navigation } from '../../components/organisms/Navigation/Navigation';
 
-const MainTemplate = ({ children }) => {
+export const MainTemplate = ({ children }) => {
   return (
     <div>
       <Navigation />
@@ -9,5 +9,3 @@ const MainTemplate = ({ children }) => {
     </div>
   );
 };
-
-export default MainTemplate;

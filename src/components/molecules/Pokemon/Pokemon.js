@@ -14,9 +14,9 @@ import {
 } from '../../../utils/GlobalFunctions';
 import { StyledWrapper, StyledCardMedia } from './Pokemon.styles';
 import { StyledTypography } from '../../atoms/Typography/Typography';
-import FullPageSpinner from '../../atoms/FullPageSpinner/FullPageSpinner';
+import { FullPageSpinner } from '../../atoms/FullPageSpinner/FullPageSpinner';
 
-const Pokemon = () => {
+export const Pokemon = () => {
   const [pokemon, setPokemon] = useState();
   const [pokemonSpecies, setPokemonSpecies] = useState([]);
   const [evolutionChain, setEvolutionChain] = useState([]);
@@ -384,5 +384,3 @@ const Pokemon = () => {
     </StyledWrapper>
   );
 };
-
-export default Pokemon;

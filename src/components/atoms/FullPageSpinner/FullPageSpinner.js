@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FaSpinner } from 'react-icons/fa';
-import { Backdrop, CircularProgress } from '@mui/material';
+import { Backdrop } from '@mui/material';
 
 const Spinner = styled(FaSpinner)`
   height: 300px;
@@ -19,12 +19,10 @@ const Spinner = styled(FaSpinner)`
   }
 `;
 
-const FullPageSpinner = () => {
+export const FullPageSpinner = () => {
   return (
     <Backdrop open={true} sx={{ backgroundColor: 'white' }}>
       <Spinner />
     </Backdrop>
   );
 };
-
-export default FullPageSpinner;

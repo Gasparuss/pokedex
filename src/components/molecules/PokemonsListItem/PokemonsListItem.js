@@ -12,7 +12,7 @@ import {
 } from '../../../utils/GlobalFunctions';
 import { StyledTypography } from '../../atoms/Typography/Typography';
 
-const PokemonsListItem = ({ pokemonData: { name, id, types } }) => {
+export const PokemonsListItem = ({ pokemonData: { name, id, types } }) => {
   const navigate = useNavigate();
   return (
     <>
@@ -70,5 +70,3 @@ const PokemonsListItem = ({ pokemonData: { name, id, types } }) => {
 PokemonsListItem.propTypes = {
   pokemonData: PropTypes.shape(PokemonsShape).isRequired
 };
-
-export default PokemonsListItem;

@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Toolbar, TextField } from '@mui/material';
 import axios from 'axios';
-import Pagination from '../../atoms/Pagination/Pagination';
+import { Pagination } from '../../atoms/Pagination/Pagination';
 import { usePokemons } from '../../../hooks/usePokemons';
-import FullPageSpinner from '../../atoms/FullPageSpinner/FullPageSpinner';
-import PokemonsListItem from '../../molecules/PokemonsListItem/PokemonsListItem';
+import { FullPageSpinner } from '../../atoms/FullPageSpinner/FullPageSpinner';
+import { PokemonsListItem } from '../../molecules/PokemonsListItem/PokemonsListItem';
 
-const Pokedex = () => {
+export const PokemonsList = () => {
   const [isLoading, setIsLoading] = useState(null);
   const { getPokemon } = usePokemons();
   const [pokemonData, setPokemonData] = useState([]);
@@ -58,6 +58,7 @@ const Pokedex = () => {
             onChange={handleSearchChange}
             label="Pokemon"
             variant="standard"
+            sx={{ marginBottom: '15px' }}
           />
         </div>
       </Toolbar>
@@ -90,5 +91,3 @@ const Pokedex = () => {
     </>
   );
 };
-
-export default Pokedex;
