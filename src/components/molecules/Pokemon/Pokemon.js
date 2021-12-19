@@ -30,11 +30,11 @@ const Pokemon = () => {
       setIsLoading(true);
       const pokemonData = await getPokemonById(id);
       const pokemonSpeciesData = await getPokemonSpecies(id);
-      const pokemonEvolutionChain = await getPokemonEvolutionChain(
-        pokemonSpeciesData.evolution_chain.url
-      );
-      const evolutionData = extractEvolutionChain(pokemonEvolutionChain);
-      setEvolutionChain(evolutionData);
+      // const pokemonEvolutionChain = await getPokemonEvolutionChain(
+      //   pokemonSpeciesData.evolution_chain.url
+      // );
+      // const evolutionData = extractEvolutionChain(pokemonEvolutionChain);
+      // setEvolutionChain(evolutionData);
       setPokemonSpecies(pokemonSpeciesData);
       setPokemon(pokemonData);
       setIsLoading(false);
@@ -228,7 +228,7 @@ const Pokemon = () => {
                   gap: '15px'
                 }}
               >
-                {evolutionChain ? (
+                {/* {evolutionChain ? (
                   evolutionChain.map(({ name, url }) => (
                     <Grid
                       item
@@ -264,7 +264,7 @@ const Pokemon = () => {
                   ))
                 ) : (
                   <div>Sorki nie mozna wczytac ewolucji co nie :D</div>
-                )}
+                )} */}
               </Grid>
               <Grid
                 container
