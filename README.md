@@ -22,7 +22,7 @@ You can search for a pokemon by name or by clicking the button next to the botto
 </p>
 
 <p aling="center">
-	<img width="100%" src="https://i.ibb.co/VNK7p6W/pokemon-detail.png" />
+	<img width="100%" src="https://i.ibb.co/wrDXNXd/Screenshot-2022-01-03-193446.png" />
 </p>
 
 ## Code Example/Issues 🔍
